@@ -1,0 +1,15 @@
+<div class="slot-row">
+  <div class="truck-slot">
+    @if (slot?.truckOnSlot) {
+    <app-truck [truck]="slot?.truckOnSlot"></app-truck>
+    }
+  </div>
+
+  <div class="unloaded-boxes">
+    @for (item of slot?.truckOnSlot?.boxes; track $index) {
+    <div style="padding: 5px">
+      <app-box [box]="item"></app-box>
+    </div>
+    }
+  </div>
+</div>

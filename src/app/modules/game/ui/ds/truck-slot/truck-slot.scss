@@ -1,0 +1,22 @@
+.slot-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.truck-slot {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: lightgray;
+  min-width: 110px;
+  min-height: 110px;
+  border: darkgray 2px solid;
+}
+
+.unloaded-boxes {
+  background-color: #8b8b8b;
+  min-width: 268px;
+  min-height: 134px;
+  display: flex;
+  flex-direction: row;
+}

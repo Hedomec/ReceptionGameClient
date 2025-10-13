@@ -1,0 +1,22 @@
+.truck-time-clock {
+  width: 30px;
+  height: 30px;
+  background-color: green;
+  border-radius: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+
+  span {
+    color: white;
+  }
+}
+
+.truck {
+  width: 110px;
+  height: 110px;
+  background-color: yellow;
+  position: relative;
+}
