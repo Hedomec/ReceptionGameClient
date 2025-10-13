@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { TruckZoneComponent } from '../ds/truck-zone/truck-zone';
-import { CategoriesZone } from '../ds/categories-zone/categories-zone';
 import { Truck } from '../../domain/model/truck';
 
 @Component({
   selector: 'app-game',
-  imports: [TruckZoneComponent, CategoriesZone],
+  imports: [TruckZoneComponent],
   templateUrl: './game.html',
   styleUrl: './game.scss',
 })

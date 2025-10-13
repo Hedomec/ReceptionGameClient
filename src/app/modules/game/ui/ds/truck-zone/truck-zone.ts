@@ -16,19 +16,15 @@ export class TruckZoneComponent implements OnInit {
   truckSlots: TruckZone = {
     slot1: {
       idSlot: 1,
-      isActive: false,
     },
     slot2: {
       idSlot: 2,
-      isActive: false,
     },
     slot3: {
       idSlot: 3,
-      isActive: false,
     },
     slot4: {
       idSlot: 4,
-      isActive: false,
     },
   };
 

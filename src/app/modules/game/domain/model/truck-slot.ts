@@ -3,7 +3,6 @@ import { Truck } from './truck';
 export interface TruckSlot {
   idSlot: number;
   truckOnSlot?: Truck;
-  isActive: boolean;
 }
 
 export interface TruckZone {
