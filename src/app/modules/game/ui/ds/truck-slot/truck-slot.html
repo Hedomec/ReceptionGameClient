@@ -6,9 +6,9 @@
   </div>
 
   <div class="unloaded-boxes">
-    @for (item of slot?.truckOnSlot?.boxes; track $index) {
+    @for (item of slot?.truckOnSlot?.boxes | slice: 0:2; track $index) {
     <div class="box-container">
-      <app-box [box]="item"></app-box>
+      <app-box [box]="item" (click)="onBoxClick(item)"></app-box>
     </div>
     }
   </div>

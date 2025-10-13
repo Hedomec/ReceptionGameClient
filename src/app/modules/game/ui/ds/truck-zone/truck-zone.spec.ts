@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TruckZone } from './truck-zone';
+import { TruckZoneComponent } from './truck-zone';
 
 describe('TruckZone', () => {
-  let component: TruckZone;
-  let fixture: ComponentFixture<TruckZone>;
+  let component: TruckZoneComponent;
+  let fixture: ComponentFixture<TruckZoneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TruckZone]
-    })
-    .compileComponents();
+      imports: [TruckZoneComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(TruckZone);
+    fixture = TestBed.createComponent(TruckZoneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

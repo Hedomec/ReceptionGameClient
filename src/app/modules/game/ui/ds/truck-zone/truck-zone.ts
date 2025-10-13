@@ -3,6 +3,7 @@ import { TruckComponet } from '../truck/truck';
 import { TruckSlot, TruckZone } from '../../../domain/model/truck-slot';
 import { TruckSlotComponent } from '../truck-slot/truck-slot';
 import { Truck } from '../../../domain/model/truck';
+import { Box } from '../../../domain/model/box';
 
 @Component({
   selector: 'app-truck-zone',
@@ -11,74 +12,85 @@ import { Truck } from '../../../domain/model/truck';
   styleUrl: './truck-zone.scss',
 })
 export class TruckZoneComponent implements OnInit {
-  @Input() incomingTrucks: Truck[] = [];
-
   truckSlots: TruckZone = {
     slot1: {
       idSlot: 1,
+      truckOnSlot: this.generateTruck(),
     },
     slot2: {
       idSlot: 2,
+      truckOnSlot: this.generateTruck(),
     },
     slot3: {
       idSlot: 3,
+      truckOnSlot: this.generateTruck(),
     },
     slot4: {
       idSlot: 4,
+      truckOnSlot: this.generateTruck(),
     },
   };
 
   constructor() {}
 
   ngOnInit() {
-    console.log('ngOnInit', this.incomingTrucks);
-    this.assignTruckToSlot();
-    this.timerAction();
+    this.UpdateCycle();
   }
 
-  timerAction() {
+  UpdateCycle() {
     setInterval(() => {
       this.updateTimeLeft();
-      console.log(this.incomingTrucks);
-      this.assignTruckToSlot();
+      this.updateTrucks();
     }, 1000);
   }
 
-  assignTruckToSlot() {
-    this.incomingTrucks.forEach((truck) => {
-      if (truck.isActive && !truck.isUnloaded) {
-        this.loadTruckToSlot(truck);
-      }
+  updateTrucks() {
+    const truck = this.generateTruck();
+    this.assignTruckToSlot(truck);
+    this.removeInactiveTrucks();
+  }
 
-      if (!truck.isActive) {
-        this.incomingTrucks.splice(this.incomingTrucks.indexOf(truck), 1);
+  generateTruck() {
+    const newTruck: Truck = {
+      timeLeft: Math.floor(Math.random() * (20 - 10 + 1)) + 10,
+      isActive: true,
+      isUnloaded: false,
+      boxes: this.generateBoxes(),
+    };
+
+    return newTruck;
+  }
+
+  generateBoxes() {
+    const numBoxes = Math.floor(Math.random() * (10 - 2 + 1)) + 2; // 2..10
+    const boxes: Box[] = [];
+
+    for (let i = 0; i < numBoxes; i++) {
+      boxes.push({ productId: i + 1, categoryId: i + 2 }); // Todo: load real categories and products
+    }
+    return boxes;
+  }
+
+  removeInactiveTrucks() {
+    Object.keys(this.truckSlots).forEach((key) => {
+      const slot = this.truckSlots[key as keyof TruckZone];
+      if (slot && slot.truckOnSlot && !slot.truckOnSlot.isActive) {
+        slot.truckOnSlot = undefined;
       }
     });
   }
 
-  loadTruckToSlot(truck: Truck) {
-    if (this.truckSlots.slot1 && !this.truckSlots.slot1.truckOnSlot) {
-      this.truckSlots.slot1.truckOnSlot = truck;
-      this.incomingTrucks[this.incomingTrucks.indexOf(truck)].isUnloaded = true;
-      return;
-    }
+  assignTruckToSlot(truck: Truck) {
+    const availableSlot = Object.keys(this.truckSlots).find((key) => {
+      const slot = this.truckSlots[key as keyof TruckZone];
+      return slot && !slot.truckOnSlot;
+    });
 
-    if (this.truckSlots.slot2 && !this.truckSlots.slot2.truckOnSlot) {
-      this.truckSlots.slot2.truckOnSlot = truck;
-      this.incomingTrucks[this.incomingTrucks.indexOf(truck)].isUnloaded = true;
-      return;
-    }
-
-    if (this.truckSlots.slot3 && !this.truckSlots.slot3.truckOnSlot) {
-      this.truckSlots.slot3.truckOnSlot = truck;
-      this.incomingTrucks[this.incomingTrucks.indexOf(truck)].isUnloaded = true;
-      return;
-    }
-
-    if (this.truckSlots.slot4 && !this.truckSlots.slot4.truckOnSlot) {
-      this.truckSlots.slot4.truckOnSlot = truck;
-      this.incomingTrucks[this.incomingTrucks.indexOf(truck)].isUnloaded = true;
-      return;
+    if (availableSlot) {
+      const slot = this.truckSlots[availableSlot as keyof TruckZone];
+      if (slot) {
+        slot.truckOnSlot = truck;
+      }
     }
   }
 
@@ -91,7 +103,6 @@ export class TruckZoneComponent implements OnInit {
           slot.truckOnSlot.timeLeft -= 1;
         } else {
           slot.truckOnSlot.isActive = false;
-          slot.truckOnSlot = undefined;
         }
       }
     });

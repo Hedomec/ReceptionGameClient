@@ -2,10 +2,12 @@ import { Component, Input } from '@angular/core';
 import { TruckComponet } from '../truck/truck';
 import { TruckSlot } from '../../../domain/model/truck-slot';
 import { BoxComponent } from '../box/box';
+import { SlicePipe } from '@angular/common';
+import { Box } from '../../../domain/model/box';
 
 @Component({
   selector: 'app-truck-slot',
-  imports: [TruckComponet, BoxComponent],
+  imports: [TruckComponet, BoxComponent, SlicePipe],
   templateUrl: './truck-slot.html',
   styleUrl: './truck-slot.scss',
 })
@@ -13,4 +15,12 @@ export class TruckSlotComponent {
   @Input() slot?: TruckSlot;
 
   constructor() {}
+
+  onBoxClick(item: Box) {
+    this.slot?.truckOnSlot?.boxes?.splice(this.slot.truckOnSlot.boxes.indexOf(item), 1);
+    if (this.slot?.truckOnSlot?.boxes?.length === 0) {
+      this.slot.truckOnSlot.isActive = false;
+    }
+    console.log('Box removed', item);
+  }
 }

@@ -9,8 +9,4 @@ import { Box } from '../../../domain/model/box';
 })
 export class BoxComponent {
   @Input() box?: Box;
-
-  onBoxClick(box: Box | undefined) {
-    console.log('Box clicked:', box);
-  }
 }
