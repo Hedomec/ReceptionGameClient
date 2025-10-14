@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TruckComponet } from '../truck/truck';
 import { TruckSlot, TruckZone } from '../../../domain/model/truck-slot';
 import { TruckSlotComponent } from '../truck-slot/truck-slot';
@@ -12,6 +12,9 @@ import { Box } from '../../../domain/model/box';
   styleUrl: './truck-zone.scss',
 })
 export class TruckZoneComponent implements OnInit {
+
+  @Output() boxClicked = new EventEmitter<Box>();
+
   truckSlots: TruckZone = {
     slot1: {
       idSlot: 1,
@@ -31,7 +34,7 @@ export class TruckZoneComponent implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.UpdateCycle();
@@ -106,5 +109,10 @@ export class TruckZoneComponent implements OnInit {
         }
       }
     });
+  }
+
+  onBoxClicked(event: any) {
+    this.boxClicked.emit(event);
+    console.log("onBoxClicked", event);
   }
 }

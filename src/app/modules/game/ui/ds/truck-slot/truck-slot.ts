@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TruckComponet } from '../truck/truck';
 import { TruckSlot } from '../../../domain/model/truck-slot';
 import { BoxComponent } from '../box/box';
@@ -14,13 +14,18 @@ import { Box } from '../../../domain/model/box';
 export class TruckSlotComponent {
   @Input() slot?: TruckSlot;
 
-  constructor() {}
+  @Output() boxClicked = new EventEmitter<Box>();
+
+  constructor() { }
 
   onBoxClick(item: Box) {
-    this.slot?.truckOnSlot?.boxes?.splice(this.slot.truckOnSlot.boxes.indexOf(item), 1);
+
+    this.boxClicked.emit(item);
+
+    /*this.slot?.truckOnSlot?.boxes?.splice(this.slot.truckOnSlot.boxes.indexOf(item), 1);
     if (this.slot?.truckOnSlot?.boxes?.length === 0) {
       this.slot.truckOnSlot.isActive = false;
-    }
-    console.log('Box removed', item);
+    }*/
+    //console.log('Box removed', item);
   }
 }

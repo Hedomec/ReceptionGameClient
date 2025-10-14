@@ -1,6 +1,6 @@
 <div style="min-height: 536px; min-width: 500px; background-color: lightblue;">
   @for (category of categories; track $index) {
-  <div class="category-item">
+  <div class="category-item" (click)="onCategoryClick(category)">
     <img [src]="category.categoryImage" [alt]="'categoryImage'" alt="" srcset="">
     <span>{{category.categoryName}}</span>
   </div>

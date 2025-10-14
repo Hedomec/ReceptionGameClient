@@ -3,6 +3,7 @@ import { TruckZoneComponent } from '../ds/truck-zone/truck-zone';
 import { Truck } from '../../domain/model/truck';
 import { CategoriesComponent } from "../ds/categories/categories";
 import { Category } from '../../domain/model/category';
+import { Box } from '../../domain/model/box';
 
 @Component({
   selector: 'app-game',
@@ -11,6 +12,10 @@ import { Category } from '../../domain/model/category';
   styleUrl: './game.scss',
 })
 export class Game {
+
+  box?: Box;
+  category?: Category;
+
   incomingTrucks: Truck[] = [
     {
       timeLeft: 5,
@@ -113,4 +118,14 @@ export class Game {
   ]
 
   ngOnInit() { }
+
+  boxSelected(event: any) {
+    this.box = event;
+    console.log(this.box);
+  }
+
+  categorySelected(event: any) {
+    this.category = event;
+    console.log(this.category);
+  }
 }
