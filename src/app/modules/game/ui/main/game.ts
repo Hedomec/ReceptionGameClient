@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TruckZoneComponent } from '../ds/truck-zone/truck-zone';
 import { Truck } from '../../domain/model/truck';
-import { CategoriesComponent } from "../ds/categories/categories";
+import { CategoriesComponent } from '../ds/categories/categories';
 import { Category } from '../../domain/model/category';
 import { Box } from '../../domain/model/box';
+import { CategoriesService } from '../../../../services/categoriesService/categories-service';
 
 @Component({
   selector: 'app-game',
@@ -12,120 +13,41 @@ import { Box } from '../../domain/model/box';
   styleUrl: './game.scss',
 })
 export class Game {
+  _categoriesService = inject(CategoriesService);
 
   box?: Box;
   category?: Category;
 
-  incomingTrucks: Truck[] = [
-    {
-      timeLeft: 5,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [
-        { productId: 1, categoryId: 1 },
-        { productId: 2, categoryId: 2 },
-      ],
-    },
-    {
-      timeLeft: 10,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [{ productId: 1, categoryId: 1 }],
-    },
-    {
-      timeLeft: 15,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [
-        { productId: 1, categoryId: 1 },
-        { productId: 2, categoryId: 2 },
-      ],
-    },
-    {
-      timeLeft: 20,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [{ productId: 1, categoryId: 1 }],
-    },
-    {
-      timeLeft: 25,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [
-        { productId: 1, categoryId: 1 },
-        { productId: 2, categoryId: 2 },
-      ],
-    },
-    {
-      timeLeft: 20,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [
-        { productId: 1, categoryId: 1 },
-        { productId: 2, categoryId: 2 },
-      ],
-    },
-    {
-      timeLeft: 25,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [
-        { productId: 1, categoryId: 1 },
-        { productId: 2, categoryId: 2 },
-      ],
-    },
-    {
-      timeLeft: 20,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [
-        { productId: 1, categoryId: 1 },
-        { productId: 2, categoryId: 2 },
-      ],
-    },
-    {
-      timeLeft: 25,
-      isActive: true,
-      isUnloaded: false,
-      boxes: [
-        { productId: 1, categoryId: 1 },
-        { productId: 2, categoryId: 2 },
-      ],
-    },
-  ];
+  categories: Category[] = [];
 
-  categories: Category[] = [
-    {
-      categoryId: 1,
-      categoryName: 'Electronics',
-      categoryImage: 'assets/images/electronics.png',
-    },
-    {
-      categoryId: 2,
-      categoryName: 'Furniture',
-      categoryImage: 'assets/images/furniture.png',
-    },
-    {
-      categoryId: 3,
-      categoryName: 'Clothing',
-      categoryImage: 'assets/images/clothing.png',
-    },
-    {
-      categoryId: 4,
-      categoryName: 'Toys',
-      categoryImage: 'assets/images/toys.png',
-    }
-  ]
-
-  ngOnInit() { }
+  async ngOnInit() {
+    await this.loadCategories();
+  }
 
   boxSelected(event: any) {
     this.box = event;
     console.log(this.box);
   }
 
-  categorySelected(event: any) {
+  catSelect(event: any) {
     this.category = event;
     console.log(this.category);
+
+    if (!this.box) {
+      console.log('Select a box first');
+      return;
+    }
+
+    if (this.category && this.category.categoryId === this.box?.categoryId) {
+      console.log('Correct match!');
+      this.box = undefined;
+      this.category = undefined;
+    }
+  }
+
+  loadCategories() {
+    this._categoriesService.getAllCategories().then((categories) => {
+      this.categories = categories.data.models;
+    });
   }
 }
