@@ -39,10 +39,10 @@ export class TruckZoneComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.UpdateCycle();
+    this.updateCycle();
   }
 
-  UpdateCycle() {
+  updateCycle() {
     setInterval(() => {
       this.updateTimeLeft();
       this.updateTrucks();
