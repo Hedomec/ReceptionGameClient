@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TruckComponet } from '../truck/truck';
-import { TruckSlot, TruckZone } from '../../../domain/model/truck-slot';
+import { TruckZone } from '../../../domain/model/truck-slot';
 import { TruckSlotComponent } from '../truck-slot/truck-slot';
 import { Truck } from '../../../domain/model/truck';
 import { Box } from '../../../domain/model/box';
+import { Product } from '../../../domain/model/product';
 
 @Component({
   selector: 'app-truck-zone',
@@ -12,6 +12,9 @@ import { Box } from '../../../domain/model/box';
   styleUrl: './truck-zone.scss',
 })
 export class TruckZoneComponent implements OnInit {
+
+  @Input() products: Product[] = [];
+
   @Output() boxClicked = new EventEmitter<Box>();
 
   truckSlots: TruckZone = {
@@ -33,7 +36,7 @@ export class TruckZoneComponent implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.UpdateCycle();

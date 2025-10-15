@@ -9,6 +9,8 @@ import { routes } from './app.routes';
 import { CategoriesGateway } from './modules/game/domain/categories/gateway/categories-gateway';
 import { CategoriesApiImpl } from './modules/game/infrastructure/driven-adapter/categories-api-impl';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ProductsGateway } from './modules/game/domain/products/gateway/products-gateway';
+import { ProductsApiImpl } from './modules/game/infrastructure/driven-adapter/products-api-impl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    { provide: CategoriesGateway, useClass: CategoriesApiImpl }, // crea nueva instancia
+    { provide: CategoriesGateway, useClass: CategoriesApiImpl },
+    { provide: ProductsGateway, useClass: ProductsApiImpl },
   ],
 };

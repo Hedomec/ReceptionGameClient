@@ -1,7 +1,8 @@
 .box-container {
   padding: 5px 10px;
-  min-width: 110px;
-  min-height: 110px;
-  background-color: burlywood;
+  min-width: 120px;
+  min-height: 120px;
+  background-image: url("../../../../../assets/box.png");
+  background-size: 120px 120px;
   border: darkgray 2px solid;
 }
