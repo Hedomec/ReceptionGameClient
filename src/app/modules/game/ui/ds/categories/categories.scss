@@ -4,9 +4,18 @@
   gap: 15px;
   align-items: center;
   padding: 10px;
+  border-top: grey;
+  border-bottom: grey;
+  border: 1px solid;
 }
 
 .category-image {
   width: 50px;
   height: 50px;
+}
+
+.categories-container {
+  min-height: 536px;
+  min-width: 500px;
+  background-color: white;
 }
