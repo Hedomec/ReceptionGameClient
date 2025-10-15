@@ -56,7 +56,7 @@ export class TruckZoneComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['products'] && !changes['products'].firstChange) {
       this.updateTrucks();
-      this.UpdateCycle();
+      this.updateCycle();
     }
 
     if (changes['correctBoxes'] && !changes['correctBoxes'].firstChange) {
