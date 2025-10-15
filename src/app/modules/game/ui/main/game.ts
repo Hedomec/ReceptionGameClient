@@ -47,15 +47,12 @@ export class Game {
 
   boxSelected(event: any) {
     this.boxesSelected = event;
-    console.log(this.boxesSelected);
   }
 
   catSelect(event: any) {
     this.category = event;
-    console.log(this.category);
 
     if (this.boxesSelected?.length <= 0) {
-      console.log('Select a box first');
       return;
     }
 
@@ -63,13 +60,13 @@ export class Game {
       (box) => box.categoryId !== this.category?.categoryId
     );
 
+    //Alguna caja no coincide con la categoría seleccionada
     if (hasMismatch) {
-      console.log('❌ Alguna caja no coincide con la categoría seleccionada');
       this.correctBoxes = [];
       this.boxesSelected = [];
       this.gameTimeLeft -= 10;
     } else {
-      console.log('✅ Todas las cajas coinciden con la categoría');
+      //Todas las cajas coinciden con la categoría
       this.correctBoxes = this.boxesSelected;
 
       this.multiplier = this.boxesSelected.length;
@@ -77,8 +74,7 @@ export class Game {
       this.scorepoints += 10 * this.multiplier;
       this.gameTimeLeft += 5 * this.multiplier;
       this.boxesSelected = [];
-      this.multiplier = 0;
-      console.log('Puntuación actual:', this.scorepoints);
+      //this.multiplier = 0;
     }
   }
 
@@ -107,11 +103,8 @@ export class Game {
     this.actualTruckGone = event;
 
     if (this.actualTruckGone >= 3) {
-      console.log('Game Over: Has perdido 3 camiones');
       this.statusGame = 'gameover';
     }
-
-    console.log('Camiones perdidos actualizados en Game:', this.actualTruckGone);
   }
 
   restartGame() {
@@ -122,7 +115,6 @@ export class Game {
     this.gameTimeLeft = event;
 
     if (this.gameTimeLeft <= 0) {
-      console.log('Game Over: Se acabó el tiempo');
       this.statusGame = 'gameover';
     }
   }

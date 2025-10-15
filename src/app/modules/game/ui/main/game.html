@@ -4,10 +4,10 @@
 >
   @if (statusGame === "playing") {
   <div class="game-info">
-    <h4 class="h4-text">Time Left: {{ gameTimeLeft }}s</h4>
-    <h4 class="h4-text">Score: {{ scorepoints }}</h4>
-    <h4 class="h4-text">Truck Gone: {{ actualTruckGone }}</h4>
-    <h4 class="h4-text">Multiplier: x{{ multiplier }}</h4>
+    <h5 class="h4-text">Time Left: {{ gameTimeLeft }} ⏰</h5>
+    <h5 class="h4-text">Truck Gone: {{ actualTruckGone }} 😡</h5>
+    <h5 class="h4-text">Score: {{ scorepoints }} 🏆</h5>
+    <h5 class="h4-text">Multiplier: x {{ multiplier }}</h5>
   </div>
   <div class="game-main-container">
     <app-truck-zone

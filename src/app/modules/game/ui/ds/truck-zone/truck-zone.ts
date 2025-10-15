@@ -180,11 +180,6 @@ export class TruckZoneComponent implements OnChanges {
 
           this.gameTimeLeftChange.emit(this.gameTimeLeft - 10);
 
-          console.log(
-            'Camión se ha ido sin descargar. Total camiones perdidos:',
-            this.actualTruckGone
-          );
-
           this.updateTruckGone.emit(this.actualTruckGone);
         }
 
@@ -211,6 +206,5 @@ export class TruckZoneComponent implements OnChanges {
     this.boxesSelected?.push(event);
 
     this.boxClicked.emit(this.boxesSelected);
-    console.log('onBoxClicked', this.boxesSelected);
   }
 }

@@ -20,6 +20,7 @@ export class Gameover {
 
     this.scoreService.submitScore(this.playerName, this.scorepoints).then(() => {
       this.isSubmitting = false;
+      window.location.reload();
     });
   }
 

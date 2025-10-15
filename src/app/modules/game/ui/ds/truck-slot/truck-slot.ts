@@ -20,11 +20,5 @@ export class TruckSlotComponent {
   onBoxClick(item: Box) {
     item.slotId = this.slot?.idSlot;
     this.boxClicked.emit(item);
-
-    /*this.slot?.truckOnSlot?.boxes?.splice(this.slot.truckOnSlot.boxes.indexOf(item), 1);
-    if (this.slot?.truckOnSlot?.boxes?.length === 0) {
-      this.slot.truckOnSlot.isActive = false;
-    }*/
-    //console.log('Box removed', item);
   }
 }
