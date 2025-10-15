@@ -1,8 +1,8 @@
 <div class="categories-container">
   @for (category of categories; track $index) {
-  <div class="category-item" (click)="onCategoryClick(category)">
+  <button class="btn btn-light btn-lg btn-block category-item" (click)="onCategoryClick(category)">
     <img [src]="category.imageUrl" [alt]="'categoryImage'" class="category-image" />
-    <span>{{ category.categoryId }} - {{ category.name }}</span>
-  </div>
+    <span>{{ category.name }}</span>
+  </button>
   }
 </div>
