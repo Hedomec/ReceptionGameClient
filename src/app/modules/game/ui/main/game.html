@@ -1,7 +1,40 @@
-<div class="container-md min-vh-100 d-flex justify-content-center align-items-center">
-  <div class="game-main-container">
-    <app-truck-zone (boxClicked)="boxSelected($event)" [products]="products"></app-truck-zone>
-    <app-categories [categories]="categories" (categorySelected)="catSelect($event)"
-      class="categories-list"></app-categories>
+<div
+  class="container-md min-vh-100 d-flex justify-content-center align-items-center"
+  style="display: flex; flex-direction: column"
+>
+  @if (statusGame === "playing") {
+  <div class="game-info">
+    <h5 class="h4-text">Time Left: {{ gameTimeLeft }} ⏰</h5>
+    <h5 class="h4-text">Truck Gone: {{ actualTruckGone }} 😡</h5>
+    <h5 class="h4-text">Score: {{ scorepoints }} 🏆</h5>
+    <h5 class="h4-text">Multiplier: x {{ multiplier }}</h5>
   </div>
+  <div class="game-main-container">
+    <app-truck-zone
+      (boxClicked)="boxSelected($event)"
+      [products]="products"
+      [correctBoxes]="correctBoxes"
+      [actualTruckGone]="actualTruckGone"
+      (updateTruckGone)="onUpdateTruckGone($event)"
+      [gameTimeLeft]="gameTimeLeft"
+      (gameTimeLeftChange)="onGameTimeLeftChange($event)"
+      [statusGame]="statusGame"
+    ></app-truck-zone>
+    <app-categories
+      [categories]="categories"
+      (categorySelected)="catSelect($event)"
+      class="categories-list"
+    ></app-categories>
+  </div>
+  } @if (statusGame === "score") {
+  <div class="score-container">
+    <app-score></app-score>
+    <button class="btn btn-primary" (click)="startGame()">Start Game</button>
+  </div>
+  } @if (statusGame === "gameover") {
+  <div class="gameover-container">
+    <app-gameover [scorepoints]="scorepoints"></app-gameover>
+    <button class="btn btn-primary" (click)="restartGame()">Restart Game</button>
+  </div>
+  }
 </div>

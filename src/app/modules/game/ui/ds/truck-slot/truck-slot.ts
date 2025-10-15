@@ -13,19 +13,12 @@ import { Box } from '../../../domain/model/box';
 })
 export class TruckSlotComponent {
   @Input() slot?: TruckSlot;
-
   @Output() boxClicked = new EventEmitter<Box>();
 
-  constructor() { }
+  constructor() {}
 
   onBoxClick(item: Box) {
-
+    item.slotId = this.slot?.idSlot;
     this.boxClicked.emit(item);
-
-    /*this.slot?.truckOnSlot?.boxes?.splice(this.slot.truckOnSlot.boxes.indexOf(item), 1);
-    if (this.slot?.truckOnSlot?.boxes?.length === 0) {
-      this.slot.truckOnSlot.isActive = false;
-    }*/
-    //console.log('Box removed', item);
   }
 }

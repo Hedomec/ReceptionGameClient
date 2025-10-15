@@ -1,1 +1,9 @@
-<div class="box-container"></div>
+<div class="box-container">
+  <img [src]="box?.imageUrl" alt="Box Image" class="box-image" />
+  @if(showInfo) {
+  <div class="box-details">
+    <p class="box-name">{{ box?.productId }}</p>
+    <p class="box-category">{{ box?.categoryId }}</p>
+  </div>
+  }
+</div>

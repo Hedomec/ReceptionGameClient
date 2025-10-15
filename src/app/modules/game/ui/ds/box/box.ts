@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Box } from '../../../domain/model/box';
+import { environment } from '../../../../../enviroments/enviroment';
 
 @Component({
   selector: 'app-box',
@@ -9,4 +10,6 @@ import { Box } from '../../../domain/model/box';
 })
 export class BoxComponent {
   @Input() box?: Box;
+
+  showInfo: boolean = environment.debugInfo;
 }
