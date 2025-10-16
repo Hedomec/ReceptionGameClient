@@ -64,6 +64,7 @@ export class TruckZoneComponent implements OnChanges {
         this.deleteCorrectBox();
       }
       this.boxesSelected = [];
+      this.unselectBoxes();
     }
 
     if (changes['statusGame'] && !changes['statusGame'].firstChange) {
@@ -85,6 +86,15 @@ export class TruckZoneComponent implements OnChanges {
         ) {
           this.truckSlots[key as keyof TruckZone]?.truckOnSlot?.boxes?.splice(index, 1);
         }
+      });
+    });
+  }
+
+  unselectBoxes() {
+    Object.keys(this.truckSlots).forEach((key) => {
+      const slot = this.truckSlots[key as keyof TruckZone];
+      slot?.truckOnSlot?.boxes?.forEach((box) => {
+        box.isSelected = false;
       });
     });
   }
@@ -128,6 +138,7 @@ export class TruckZoneComponent implements OnChanges {
         productId: product.productId,
         categoryId: product.categoryId,
         imageUrl: product.imageUrl,
+        isSelected: false,
       });
     }
 

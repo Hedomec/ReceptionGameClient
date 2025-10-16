@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TruckComponet } from '../truck/truck';
 import { TruckSlot } from '../../../domain/model/truck-slot';
 import { BoxComponent } from '../box/box';
-import { SlicePipe } from '@angular/common';
+import { SlicePipe, NgClass } from '@angular/common';
 import { Box } from '../../../domain/model/box';
 
 @Component({
   selector: 'app-truck-slot',
-  imports: [TruckComponet, BoxComponent, SlicePipe],
+  imports: [TruckComponet, BoxComponent, SlicePipe, NgClass],
   templateUrl: './truck-slot.html',
   styleUrl: './truck-slot.scss',
 })
@@ -15,10 +15,11 @@ export class TruckSlotComponent {
   @Input() slot?: TruckSlot;
   @Output() boxClicked = new EventEmitter<Box>();
 
-  constructor() {}
+  constructor() { }
 
   onBoxClick(item: Box) {
     item.slotId = this.slot?.idSlot;
+    item.isSelected = true;
     this.boxClicked.emit(item);
   }
 }
