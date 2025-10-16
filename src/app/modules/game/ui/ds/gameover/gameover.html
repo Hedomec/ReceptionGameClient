@@ -2,7 +2,7 @@
   <h3>Game Over</h3>
   <p>Your final score: {{ scorepoints }}</p>
   <div class="input-container">
-    <input type="text" [(ngModel)]="playerName" placeholder="Enter your name" [minlength]="1" [maxlength]="50" />
+    <input type="text" [(ngModel)]="playerName" placeholder="Enter your name" [maxlength]="50" />
     <button class="btn btn-primary" (click)="submitScore()" [disabled]="isSubmitting || !playerName">
       {{ isSubmitting ? 'Submitting...' : 'Submit Score' }}
     </button>
